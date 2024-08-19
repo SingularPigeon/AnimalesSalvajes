@@ -7,7 +7,7 @@ class Oso extends Animal {
   }
 
   grunir() {
-  this.sonido = sonido;
+  return "grunir";
   }
 }
 

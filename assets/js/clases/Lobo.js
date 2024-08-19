@@ -8,7 +8,7 @@ class Lobo extends Animal {
   }
 
   aullar() {
-  this.sonido = sonido;
+  return "aullar";
   }
 }
 

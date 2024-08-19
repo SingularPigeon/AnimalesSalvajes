@@ -19,7 +19,7 @@ class Animal {
     return this.#edad;
   }
 
-  get img() {
+  get imagen() {
     return this.#imagen;
   }
 

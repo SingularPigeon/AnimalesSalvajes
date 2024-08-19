@@ -6,7 +6,7 @@ class Aguila extends Animal{
     
   }
 chillar() {
-  this.sonido = sonido;
+return "chillar";
   }
 
 }

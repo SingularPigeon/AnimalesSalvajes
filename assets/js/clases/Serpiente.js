@@ -6,7 +6,7 @@ class Serpiente extends Animal {
     
   }
   sisear() {
-  this.sonido = sonido;
+  return "sisear";
   }
 }
 

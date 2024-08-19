@@ -6,7 +6,7 @@ class Leon extends Animal {
     
   }
   rugir() {
-this.sonido = sonido;
+    return "rugir";
   }
 }
 

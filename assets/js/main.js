@@ -5,8 +5,10 @@ import { Oso } from "./clases/Oso.js";
 import { Serpiente } from "./clases/Serpiente.js";
 import { iife } from "./datosApi.js";
 
+const nuevosAnimales = {Aguila, Leon, Lobo, Oso, Serpiente}
 
-document.getElementById('animal').addEventListener("change", async (event) => {
+// Selección de animal con su imagen en el formulario
+document.getElementById('animal').addEventListener('change', async (event) => {
 
   const { imagen} = await iife.obtenerDatos(event.target.value);
   const preview = document.getElementById('preview') 
@@ -16,66 +18,54 @@ document.getElementById('animal').addEventListener("change", async (event) => {
   preview.style.backgroundPosition = 'center'; 
   preview.style.backgroundRepeat = 'no-repeat'
   
-
 })
 
 
+// añadir animales a la tabla de investigados
 
+document.getElementById('btnRegistrar').addEventListener('click', async () => {
 
-
-
-
-
-
-
-
-
-
-
-
-
-// let animales = [];
-// let img = document.getElementById('preview')
-// let audio = document.getElementById('player')
-// const registrar = document.getElementById('btnRegistrar');
-// let nombre = document.getElementById('animal');
-
-
-// nombre.addEventListener('change', function(event) {
-//   const valor = event.target.value;
-//   switch (valor) {
-//       case 'Leon':
-//           img.innerHTML = `<img src="assets/imgs/Leon.png" width="200">`;
-//           break;
-//       case 'Lobo':
-//           img.innerHTML = `<img src="assets/imgs/Lobo.jpg" width="200">`;
-//           break;
-//       case 'Oso':
-//           img.innerHTML = `<img src="assets/imgs/Oso.jpg" width="250">`;
-//           break;
-//       case 'Serpiente':
-//           img.innerHTML = `<img src="assets/imgs/Serpiente.jpg" width="250" alt="200">`;
-//           break;
-//       case 'Aguila':
-//           img.innerHTML = `<img src="assets/imgs/Aguila.png" width="200">`;
-//           break;
-//       default:
-//           img.innerHTML = ''; // Opcional: limpiar la imagen si no coincide ningún caso
-//           break;
-//   }
-// });
-
-// const preview =  document.getElementById("preview")
-// document.getElementById('animal').addEventListener("change", async (event) => {
-//   const nombre = event.target.value; 
-//   const animalData = await getData(nombre);
+  const nombreHTML = document.getElementById('animal')
+  const edadHTML = document.getElementById('edad')
+  const comentariosHTML = document.getElementById('comentarios')
+  const { imagen, sonido } = await iife.obtenerDatos(nombreHTML.value);
   
-//   if (animalData) {
-//     preview.innerHTML = `
-//       <img src="${animalData.imagen}" alt="${animalData.name}" 
-//       class="mw-100 h-100 object-fit-cover d-block mx-auto"  />
-//     `;
-//   } else {
-//     preview.innerHTML = '<p>No se encontró información para este animal.</p>';
-//   }
-// })
+  if (!nombreHTML.value || !edadHTML.value || !comentariosHTML.value) {
+    alert('Por favor, complete todos los campos.');
+    return;
+  }
+  
+  // Creamos instancia de un animal
+  let animal = new nuevosAnimales[nombreHTML.value](
+                  nombreHTML.value, 
+                  edadHTML.value,
+                  imagen,
+                  comentariosHTML.value,
+                  sonido
+                );
+  
+
+iife.agregarAnimal(animal);
+iife.cardAnimal(iife.listaAnimales, 'Animales')
+
+});
+
+// mostrar card con detalles de cada animal agregado a la tabla de investigados
+
+const btnsModal = document.querySelectorAll('.btnMostrarModal');
+btnsModal.forEach((btn) => {
+    btn.addEventListener("click", () => {
+        const id = btn.value;
+        mostrarModal(nuevosAnimales, id);
+    });
+});
+
+
+
+
+
+
+
+
+
+
