@@ -3,7 +3,7 @@ import { Leon } from "./clases/Leon.js";
 import { Lobo } from "./clases/Lobo.js";
 import { Oso } from "./clases/Oso.js";
 import { Serpiente } from "./clases/Serpiente.js";
-import { iife } from "./datosApi.js";
+import { iife } from "./modulos/iife.js";
 
 const nuevosAnimales = {Aguila, Leon, Lobo, Oso, Serpiente}
 
@@ -20,9 +20,7 @@ document.getElementById('animal').addEventListener('change', async (event) => {
   
 })
 
-
-// añadir animales a la tabla de investigados
-
+// Añade animales a la tabla de investigados
 document.getElementById('btnRegistrar').addEventListener('click', async () => {
 
   const nombreHTML = document.getElementById('animal')
@@ -35,30 +33,29 @@ document.getElementById('btnRegistrar').addEventListener('click', async () => {
     return;
   }
   
-  // Creamos instancia de un animal
+  // Crea instancia de un animal nuevo
   let animal = new nuevosAnimales[nombreHTML.value](
-                  nombreHTML.value, 
-                  edadHTML.value,
-                  imagen,
-                  comentariosHTML.value,
-                  sonido
-                );
-  
-
+     nombreHTML.value, 
+     edadHTML.value,
+     imagen,
+     comentariosHTML.value,
+     sonido
+    );
+// Llamada a las funciones creadas en iife.
 iife.agregarAnimal(animal);
 iife.cardAnimal(iife.listaAnimales, 'Animales')
-
+iife.limpiar()
 });
 
+// por descrifar 🙃
 // mostrar card con detalles de cada animal agregado a la tabla de investigados
-
-const btnsModal = document.querySelectorAll('.btnMostrarModal');
-btnsModal.forEach((btn) => {
-    btn.addEventListener("click", () => {
-        const id = btn.value;
-        mostrarModal(nuevosAnimales, id);
-    });
-});
+// const btnsModal = document.querySelectorAll('.btnMostrarModal');
+// btnsModal.forEach((btn) => {
+//     btn.addEventListener("click", () => {
+//         const id = btn.value;
+//         mostrarModal(nuevosAnimales, id);
+//     });
+// });
 
 
 
